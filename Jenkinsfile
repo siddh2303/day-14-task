@@ -17,7 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("${env.IMAGE_NAME}")
+                    //def dockerImage = docker.build("${env.IMAGE_NAME}")
+                    sh "docker buildx build -t ${env.IMAGE_NAME} ."
                 }
             }
         }
@@ -26,7 +27,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS}") {
-                        dockerImage.push('latest')
+                        //dockerImage.push('latest')
+                        sh "docker push ${env.IMAGE_NAME}:latest"
                     }
                 }
             }
