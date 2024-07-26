@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
+        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         REPO_URL = 'https://github.com/siddh2303/day-14-task.git'
         IMAGE_NAME = 'siddhpatel/java-app-build'
     }
@@ -26,7 +26,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS}") {
+                    docker.withRegistry('https://index.docker.io/v1/', "dockerhub-credentials-id") {
                         //dockerImage.push('latest')
                         sh "docker push ${env.IMAGE_NAME}:latest"
                     }
