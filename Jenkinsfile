@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
+        DOCKERHUB_CREDENTIALS = credentialsId('dockerhub-credentials-id')
         REPO_URL = 'https://github.com/siddh2303/day-14-task.git'
         IMAGE_NAME = 'siddhpatel/java-app-build'
     }
