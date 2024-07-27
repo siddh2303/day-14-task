@@ -17,7 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def dockerImage = docker.build("${env.IMAGE_NAME}")
+                    //def dockerImage = docker.build("${env.IMAGE_NAME}")
+                    sh "docker build -t ${env.IMAGE_NAME} ."
                 }
             }
         }
@@ -26,7 +27,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', "${env.DOCKERHUB_CREDENTIALS}") {
-                        dockerImage.push('latest')
+                        //dockerImage.push('latest')
+                        sh "docker push ${env.IMAGE_NAME}:latest"
                     }
                 }
             }
@@ -35,7 +37,7 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    sh 'docker run -d --name java-app-build -p 8090:8090 ${env.IMAGE_NAME}:latest'
+                    sh 'docker run -d --name java-app-build -p 8090:90 ${env.IMAGE_NAME}:latest'
                 }
             }
         }
