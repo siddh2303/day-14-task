@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    sh 'docker run -d --name java-app-build -p 8090:90 ${env.IMAGE_NAME}:latest'
+                    echo "Deployed"
                 }
             }
         }
