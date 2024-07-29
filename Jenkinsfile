@@ -37,7 +37,9 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    echo "Deployed"
+                    echo "Deploying stage"
+                    sh 'javac Main.java'
+                    sh 'java Main'
                 }
             }
         }
